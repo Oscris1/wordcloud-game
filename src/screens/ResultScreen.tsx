@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {RootState} from '../store';
 import {useSelector} from 'react-redux';
+import {calculateFinalScore} from '../store/selectors';
 
 const ResultScreen = () => {
-  const finalScore = useSelector((state: RootState) => state.words.final_score);
+  const finalScore = useSelector(calculateFinalScore);
   const name = useSelector((state: RootState) => state.login.name);
   return (
     <SafeAreaView style={styles.container}>

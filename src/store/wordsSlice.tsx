@@ -8,7 +8,6 @@ interface WordsState {
   good_words: string[];
   selected_words: string[];
   checked: boolean;
-  final_score: number | null;
 }
 
 export const fetchWords = createAsyncThunk('words/fetchWords', async () => {
@@ -27,7 +26,6 @@ const initialState = {
   good_words: [],
   selected_words: [],
   checked: false,
-  final_score: null,
 } as WordsState;
 
 const wordsSlice = createSlice({
@@ -45,21 +43,6 @@ const wordsSlice = createSlice({
         state.selected_words.push(payload);
       }
     },
-    calculateFinalScore: state => {
-      let score = 0;
-
-      let selectedWordsCopy = [...state.selected_words];
-      state.good_words.map(word => {
-        if (state.selected_words.includes(word)) {
-          score += 2;
-          selectedWordsCopy = selectedWordsCopy.filter(item => item !== word);
-        } else {
-          score -= 1;
-        }
-      });
-      score -= selectedWordsCopy.length;
-      state.final_score = score;
-    },
   },
   extraReducers: builder => {
     builder
@@ -75,6 +58,5 @@ const wordsSlice = createSlice({
   },
 });
 
-export const {setChecked, toggleSelectedWord, calculateFinalScore} =
-  wordsSlice.actions;
+export const {setChecked, toggleSelectedWord} = wordsSlice.actions;
 export default wordsSlice;

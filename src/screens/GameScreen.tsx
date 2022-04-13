@@ -10,7 +10,7 @@ import CloudArea from '../components/CloudArea';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {useAppDispatch} from '../store';
-import {setChecked, calculateFinalScore} from '../store/wordsSlice';
+import {setChecked} from '../store/wordsSlice';
 
 const GameScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
@@ -18,7 +18,6 @@ const GameScreen = ({navigation}) => {
 
   const pressHandler = () => {
     if (words.checked) {
-      dispatch(calculateFinalScore());
       navigation.navigate('Result');
     } else {
       dispatch(setChecked());
